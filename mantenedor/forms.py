@@ -10,7 +10,7 @@ class tipoForm(forms.ModelForm):
             'TIPO',
         ]
         labels = {
-            'PK_TIPO_ROD': 'Codigo',
+            'PK_TIPO_ROD': 'ID',
             'TIPO': 'Descripcion',
         }
 

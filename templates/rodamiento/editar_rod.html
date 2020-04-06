@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Agregar Rodamiento
+Editar
 {% endblock %}
 
 {% block content %}
@@ -25,46 +25,46 @@ Agregar Rodamiento
         {% endfor %}
         {% endif %}
 
-        <div class="form-row">
+        <div class="form-row" >
             <div class="col-md-4 col-lg-4">
                 <label class="text-white" for="">D INT A: </label>
-                <input type="number" onfocus="this.value=''" step="any" value=0 class="form-control text-white bg-dark" placeholder="D INT A" name="D_INT_A">
+                <input type="number" step="any" value={{ form.D_INT_A.value }} class="form-control text-white bg-dark" placeholder="D INT A" name="D_INT_A">
             </div>
             <div class="col-md-4 col-lg-4">
                 <label class="text-white" for="">D INT A1: </label>
-                <input type="number" onfocus="this.value=''" step="any" value=0 class="form-control text-white bg-dark" placeholder="D INT A1" name="D_INT_A1">
+                <input type="number" step="any" value={{ form.D_INT_A1.value }} value=0 class="form-control text-white bg-dark" placeholder="D INT A1" name="D_INT_A1">
             </div>
             <div class="col-md-4 col-lg-4">
                 <label class="text-white" for="">D EXT D: </label>
-                <input type="number" onfocus="this.value=''"  step="any" value=0 class="form-control text-white bg-dark" placeholder="D EXT D" name="D_EXT_D">
+                <input type="number" step="any" value={{ form.D_EXT_D.value }}  value=0 class="form-control text-white bg-dark" placeholder="D EXT D" name="D_EXT_D">
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-4 col-lg-4">
                 <label class="text-white" for="">D EXT D1: </label>
-                <input type="number" onfocus="this.value=''" step="any" value=0 class="form-control text-white bg-dark" placeholder="D EXT D1" name="D_EXT_D1">
+                <input type="number" step="any" value={{ form.D_EXT_D1.value }} value=0 class="form-control text-white bg-dark" placeholder="D EXT D1" name="D_EXT_D1">
             </div>
             <div class="col-md-4 col-lg-4">
                 <label class="text-white" for="">D ESP B: </label>
-                <input type="number" onfocus="this.value=''" step="any" value=0 class="form-control text-white bg-dark" placeholder="D ESP B" name="D_ESP_B">
+                <input type="number" step="any" value={{ form.D_ESP_B.value }} value=0 class="form-control text-white bg-dark" placeholder="D ESP B" name="D_ESP_B">
             </div>
             <div class="col-md-4 col-lg-4">
                 <label class="text-white" for="">D ESP C: </label>
-                <input type="number" onfocus="this.value=''" step="any" value=0 class="form-control text-white bg-dark" placeholder="D ESP C" name="D_ESP_C">
+                <input type="number" step="any" value={{ form.D_ESP_C.value }} value=0 class="form-control text-white bg-dark" placeholder="D ESP C" name="D_ESP_C">
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-4 col-lg-4">
                 <label class="text-white" for="">D ESP T: </label>
-                <input type="number" onfocus="this.value=''" step="any" value=0 class="form-control text-white bg-dark" placeholder="D ESP T" name="D_ESP_T">
+                <input type="number" step="any" value={{ form.D_ESP_T.value }} value=0 class="form-control text-white bg-dark" placeholder="D ESP T" name="D_ESP_T">
             </div>
             <div class="col-md-4 col-lg-4">
                 <label class="text-white" for="">N° PARTE 1: </label>
-                <input type="text" class="form-control text-white bg-dark" placeholder="N° Parte 1" name="N_PARTE_1">
+                <input type="text" class="form-control text-white bg-dark" value="{{ form.N_PARTE_1.value }}" placeholder="N° Parte 1" name="N_PARTE_1">
             </div>
             <div class="col-md-4 col-lg-4">
                 <label class="text-white" for="">N° PARTE 2: </label>
-                <input type="text" class="form-control text-white bg-dark" placeholder="N° Parte 2" name="N_PARTE_2">
+                <input type="text" class="form-control text-white bg-dark" value="{{ form.N_PARTE_2.value }}" placeholder="N° Parte 2" name="N_PARTE_2">
             </div>
         </div>
         <div class="from-row">
@@ -81,17 +81,12 @@ Agregar Rodamiento
         <div class="from-row">
             <div class="col-md-12 col-lg-12">
                 <label class="text-white" for="">Descripcion: </label>
-                <textarea class="form-control text-white bg-dark"  placeholder="Descripcion" name="DESCRIPCION" rows="3"></textarea>
+                <textarea class="form-control text-white bg-dark"  placeholder="Descripcion" name="DESCRIPCION" rows="3">{{ form.DESCRIPCION.value }}</textarea>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary mb-2">Agregar</button>
+        <button type="submit" class="btn btn-primary mb-2">Editar</button>
 
     </form>
 </div>
-{% block script %}
-<script src="/static/js/scripts.js"></script>
-{% endblock %}
-
-
 {% endblock %}

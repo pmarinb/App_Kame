@@ -2,42 +2,42 @@
 {% load static %}
 
 {% block title %}
-Buscador
+Buscador Rodamiento
 {% endblock %}
 
 {% block content %}
-<div class="bg-dark"> 
-    <form method="get" class="bg-dark">
+<div class="bg-dark">
+    <form method="get" class="bg-dark" >
         <div class="form-row">
             <div class="col">
-                <input type="number" class="form-control text-white bg-dark" placeholder="D INT A" name="D_INT_A">
+                <input id="input" type="number" class="form-control text-white bg-dark" placeholder="D INT A" name="D_INT_A" autocomplete="off">
             </div>
             <div class="col">
-                <input type="number" class="form-control text-white bg-dark" placeholder="D INT A1" name="D_INT_A1">
+                <input type="number" class="form-control text-white bg-dark" placeholder="D INT A1" name="D_INT_A1" autocomplete="off">
             </div>
             <div class="col">
-                <input type="number" class="form-control text-white bg-dark" placeholder="D EXT D" name="D_EXT_D">
+                <input type="number" class="form-control text-white bg-dark" placeholder="D EXT D" name="D_EXT_D" autocomplete="off">
             </div>
             <div class="col">
-                <input type="number" class="form-control text-white bg-dark" placeholder="D EXT D1" name="D_EXT_D1">
+                <input type="number" class="form-control text-white bg-dark" placeholder="D EXT D1" name="D_EXT_D1" autocomplete="off">
             </div>
             <div class="col">
-                <input type="number" class="form-control text-white bg-dark" placeholder="D ESP B" name="D_ESP_B">
+                <input type="number" class="form-control text-white bg-dark" placeholder="D ESP B" name="D_ESP_B" autocomplete="off"> 
             </div>
             <div class="col">
-                <input type="number" class="form-control text-white bg-dark" placeholder="D ESP C" name="D_ESP_C">
+                <input type="number" class="form-control text-white bg-dark" placeholder="D ESP C" name="D_ESP_C" autocomplete="off">
             </div>
             <div class="col">
-                <input type="number" class="form-control text-white bg-dark" placeholder="D ESP T" name="D_ESP_T">
+                <input type="number" class="form-control text-white bg-dark" placeholder="D ESP T" name="D_ESP_T" autocomplete="off">
             </div>
         </div>
         <hr class="bg-light">
         <div class="form-row">
             <div class="col">
-                <input type="text" class="form-control text-white bg-dark" placeholder="N° Parte 1" name="N_PARTE_1">
+                <input type="text" class="form-control text-white bg-dark" placeholder="N° Parte 1" name="N_PARTE_1" autocomplete="off">
             </div>
             <div class="col">
-                <input type="text" class="form-control text-white bg-dark" placeholder="N° Parte 2" name="N_PARTE_2">
+                <input type="text" class="form-control text-white bg-dark" placeholder="N° Parte 2" name="N_PARTE_2" autocomplete="off">
             </div>
             <div class="col">
                 <select class="form-control form-control text-white bg-dark" name="FK_TIPO_ROD">
@@ -72,7 +72,7 @@ Buscador
             <tbody>
 
                 {% for Rodamiento in filter.qs %}
-                <tr>
+                <tr id='start'>
                     <td>{{ Rodamiento.D_INT_A }}</td>
                     <td>{{ Rodamiento.D_INT_A1 }}</td>
                     <td>{{ Rodamiento.D_EXT_D }}</td>
@@ -83,13 +83,15 @@ Buscador
                     <td>{{ Rodamiento.N_PARTE_1 }}</td>
                     <td>{{ Rodamiento.FK_TIPO_ROD }}</td>
 
-                    <td><a class="text-danger" href="/mantenedor/rod/eliminar/{{ Rodamiento.PK_ROD  }}"
-                            onclick="return confirm('¿Esta seguro de borrar?');">Eliminar</a></td>
-                    <td><a class="text-danger" href="/mantenedor/rod/editar/{{ Rodamiento.PK_ROD }}">Modificar</a></td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal"
+                    <td><button type="button" class="btn btn-primary {{ forloop.counter }}" data-toggle="modal"
                             data-target="#id{{ Rodamiento.PK_ROD  }}">
                             Ver Mas.
                         </button></td>
+                    <td><a class="text-danger {{ forloop.counter }}"
+                            href="/mantenedor/rod/eliminar/{{ Rodamiento.PK_ROD  }}"
+                            onclick="return confirm('¿Esta seguro de borrar?');">Eliminar</a></td>
+                    <td><a class="text-danger {{ forloop.counter }}"
+                            href="/mantenedor/rod/editar/{{ Rodamiento.PK_ROD }}" >Modificar</a></td>
                 </tr>
                 <div class="modal" id="id{{ Rodamiento.PK_ROD  }}">
                     <div class="modal-dialog">
@@ -106,22 +108,30 @@ Buscador
                             <div class="modal-body bg-dark text-white">
                                 <h5>N° Parte 2: </h5>
                                 <h6>{{ Rodamiento.N_PARTE_2 }}</h6>
+                                <hr class="bg-light">
                                 <h5>Descipcion: </h5>
                                 <h6>{{ Rodamiento.DESCRIPCION }}</h6>
+                                <hr class="bg-light">
 
 
-
+                                <h5>Equivalentes: </h5>
+                                <hr class="bg-light">
                                 {% for Equivalente in equiv %}
                                 {% if Rodamiento.PK_ROD == Equivalente.FK_RODAMIENTO.PK_ROD %}
+
+                                <h6>{{ Equivalente.N_ROD }} - {{ Equivalente.MARCA }}
+                                    <a class="btn-sm btn-primary float-right"
+                                        href="/mantenedor/equiva/buscar?id={{ Equivalente.id }}">Ver Equivalente</a>
+                                </h6>
                                 <hr class="bg-light">
-                                <h5>Equivalente: </h5>
-                                <h6>{{ Equivalente.N_ROD }} - {{ Equivalente.MARCA }}</h6>
                                 {% endif %}
                                 {% endfor %}
                             </div>
 
                             <!-- Modal footer -->
                             <div class="modal-footer bg-dark text-white">
+                                <a class="btn btn-primary float-right"
+                                    href="/mantenedor/equiva/agregar/{{ Rodamiento.PK_ROD }}">Agregar Equivalente</a>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                             </div>
 
@@ -132,4 +142,19 @@ Buscador
             </tbody>
         </table>
     </div>
+    {% block script %}
+    <script src="/static/js/tabla.js"></script>
+
+    <script>
+        $('.modal').on('show.bs.modal', function () {
+            $('.modal').not($(this)).each(function () {
+                $(this).modal('hide');
+            });
+        });
+    </script>
+    {% endblock %}
+
+    {% block scriptesc %}
+    {% endblock %}
+
     {% endblock %}

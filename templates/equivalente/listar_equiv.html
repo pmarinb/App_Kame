@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+Buscador Equivalente
+{% endblock %}
+
+{% block content %}
+<div class="bg-dark">
+    <form method="get" class="bg-dark">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" class="form-control text-white bg-dark" placeholder="Numero Rodamiento" name="N_ROD">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control text-white bg-dark" placeholder="Marca" name="MARCA">
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+    <div id="tabla" class="table-responsive">
+        <table class="table table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Numero Rodamiento</th>
+                    <th scope="col">Marca</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for equiv in filter.qs %}
+                <tr>
+                    <td>{{ equiv.N_ROD }}</td>
+                    <td>{{ equiv.MARCA }}</td>
+                    <td><a class="text-primary" href="/mantenedor/home?PK_ROD={{ equiv.FK_RODAMIENTO.PK_ROD }}">Ver Rodamiento</a></td>
+                    <td><a class="text-danger" href="/mantenedor/equiva/editar/{{ equiv.id }}">Modificar</a></td>
+                    <td><a class="text-danger" href="/mantenedor/equiva/eliminar/{{ equiv.id  }}"
+                        onclick="return confirm('¿Esta seguro de borrar?');">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+{% endblock %}

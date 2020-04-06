@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Agregar Tipo
+Editar Tipo
 {% endblock %}
 
 {% block content %}
@@ -27,17 +27,19 @@ Agregar Tipo
             <div class="col">
                 <label class="text-white" for="">ID: </label>
                 <input type="text"  class="form-control text-white bg-dark"
-                    placeholder="ID" name="PK_TIPO_ROD">
+                    placeholder="ID" name="PK_TIPO_ROD" value="{{ form.PK_TIPO_ROD.value }}" disabled>
             </div>
         </div>
         <div class="form-row">
             <div class="col">
                 <label class="text-white" for="">Descipcion</label>
                 <input type="text"  class="form-control text-white bg-dark"
-                    placeholder="Descipcion" name="TIPO">
+                    placeholder="Descipcion" name="TIPO"
+                    value="{{ form.TIPO.value }}"
+                    >
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mb-2">Agregar</button>
+        <button type="submit" class="btn btn-primary mb-2">Editar</button>
     </form>
 </div>
 {% endblock %}

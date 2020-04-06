@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+Buscador Tipo
+{% endblock %}
+
+{% block content %}
+<div class="bg-dark">
+    <form method="get" class="bg-dark">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" class="form-control text-white bg-dark" placeholder="ID" name="PK_TIPO_ROD">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control text-white bg-dark" placeholder="Tipo" name="TIPO">
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+    <div id="tabla" class="table-responsive">
+        <table class="table table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tipo in filter.qs %}
+                <tr>
+                    <td>{{ tipo.PK_TIPO_ROD }}</td>
+                    <td>{{ tipo.TIPO }}</td>
+                    <td><a class="text-danger" href="/mantenedor/tipo_rod/editar/{{ tipo.PK_TIPO_ROD }}">Modificar</a></td>
+                    <td><a class="text-danger" href="/mantenedor/tipo_rod/eliminar/{{ tipo.PK_TIPO_ROD  }}"
+                        onclick="return confirm('¿Esta seguro de borrar?');">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+
+{% endblock %}
